@@ -16,3 +16,11 @@ model Listado {
   clinica String
   cargo   String
 }
+
+model Error {
+  id           Int    @id @default(autoincrement())
+  nombre       String
+  clinica      String
+  cargo        String
+  errorMessage String
+}

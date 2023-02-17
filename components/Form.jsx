@@ -14,10 +14,8 @@ export default function Form () {
     if (otro?.length > 0) { rest.cargo = `Otro: ${capitalize(data.otro)}` }
     const body = rest
 
-    console.log({ body })
-
     try {
-      const response = await fetch('/api/insert', {
+      const response = await fetch('/api/inserts', {
         body: JSON.stringify(body),
         method: 'POST',
         headers: {
@@ -25,14 +23,21 @@ export default function Form () {
         }
       })
       await response.json()
-      swal('Excelent', 'Usuario guardado', 'success')
+      swal('Excelente', 'Usuario guardado', 'success')
       reset({
         nombre: '',
         cargo: '',
         clinica: ''
       })
     } catch (error) {
-      console.log({ error })
+      await fetch('/api/saveError', {
+        body: JSON.stringify({ ...body, errorMessage: String(error) }),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      swal('Error', 'Ha ocurrido un error. Comunicar con el admintrador', 'error')
     }
   }
 

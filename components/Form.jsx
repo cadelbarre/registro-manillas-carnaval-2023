@@ -12,7 +12,11 @@ export default function Form () {
     const { otro, ...rest } = data
 
     if (otro?.length > 0) { rest.cargo = `Otro: ${capitalize(data.otro)}` }
-    const body = rest
+    const body = {
+      cargo: rest.cargo.trim(),
+      nombre: rest.nombre.trim(),
+      clinica: rest.clinica.trim()
+    }
 
     try {
       const response = await fetch('/api/insert', {

@@ -15,7 +15,7 @@ export default function Form () {
     const body = rest
 
     try {
-      const response = await fetch('/api/inserts', {
+      const response = await fetch('/api/insert', {
         body: JSON.stringify(body),
         method: 'POST',
         headers: {
